@@ -1,0 +1,151 @@
+# 4:1 Multiplexer using Verilog HDL
+
+## Introduction
+
+A multiplexer (MUX) is a combinational digital circuit that selects
+one input from multiple input signals and sends the selected input
+to a single output.
+
+This project implements a 4:1 multiplexer using Verilog HDL.
+
+## Features
+
+* 4 input lines
+* 2 select lines
+* 1 output line
+* Combinational circuit
+* Verilog HDL implementation
+* Testbench included
+* Simulation output included
+
+## Folder Structure
+
+```text
+verilog-4to1-multiplexer/
+│
+├── src/
+│   └── mux_4to1.v
+│
+├── tb/
+│   └── mux_4to1_tb.v
+│
+├── simulation/
+│   └── simulation_output.txt
+│
+└── README.md
+```
+
+## Block Diagram
+
+```text
+             ┌───────────────┐
+ I0 ────────►│               │
+ I1 ────────►│               │
+ I2 ────────►│    4:1 MUX    │──────► Y
+ I3 ────────►│               │
+             │               │
+ S1 ────────►│               │
+ S0 ────────►│               │
+             └───────────────┘
+```
+
+## Inputs and Outputs
+
+| Signal | Direction |  Width | Description     |
+| ------ | --------- | -----: | --------------- |
+| I      | Input     | 4 bits | Data inputs     |
+| S      | Input     | 2 bits | Select lines    |
+| Y      | Output    |  1 bit | Selected output |
+
+## Truth Table
+
+| S1 | S0 | Selected Input | Output |
+| -- | -- | -------------- | ------ |
+| 0  | 0  | I0             | I0     |
+| 0  | 1  | I1             | I1     |
+| 1  | 0  | I2             | I2     |
+| 1  | 1  | I3             | I3     |
+
+## Working Principle
+
+The two select lines determine which input is connected to the
+output.
+
+* `S = 00` selects `I0`
+* `S = 01` selects `I1`
+* `S = 10` selects `I2`
+* `S = 11` selects `I3`
+
+The MUX is a combinational circuit, so it does not require a clock.
+
+## Verilog Implementation
+
+The selection is implemented using a `case` statement:
+
+```verilog
+always @(*) begin
+    case (S)
+        2'b00: Y = I[0];
+        2'b01: Y = I[1];
+        2'b10: Y = I[2];
+        2'b11: Y = I[3];
+        default: Y = 1'b0;
+    endcase
+end
+```
+
+## Simulation
+
+The testbench applies different select combinations and verifies
+that the corresponding input appears at the output.
+
+For example, when:
+
+```text
+I = 1010
+```
+
+the output sequence is:
+
+```text
+S = 00 → Y = 0
+S = 01 → Y = 1
+S = 10 → Y = 0
+S = 11 → Y = 1
+```
+
+## Applications
+
+Multiplexers are commonly used in:
+
+* Data selection
+* Communication systems
+* Digital processors
+* Control systems
+* ALU circuits
+* Data routing
+* Digital switching circuits
+
+## Advantages
+
+* Reduces the number of required connections
+* Allows multiple signals to share one output
+* Simple and efficient digital circuit
+* Useful in data-routing applications
+
+## Tools Used
+
+* Verilog HDL
+* Icarus Verilog
+* GTKWave
+* ModelSim / Vivado
+
+## Conclusion
+
+A 4:1 multiplexer was successfully designed using Verilog HDL.
+The testbench verifies that the correct input is selected according
+to the two select lines. The project demonstrates the basic operation
+of a combinational multiplexer.
+
+```
+```
